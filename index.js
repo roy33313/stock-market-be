@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const db = require("./database/connection");
+const news= require("./src/assets/data/news.json")
 dotenv.config();
 
 const app = express();
@@ -10,6 +11,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
+app.get("/news", (req, res) => {
+  res.json(news)
+})
 
 app.post("/login", (req, res) => {
   db.all(
